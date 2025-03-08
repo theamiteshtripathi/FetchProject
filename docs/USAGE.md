@@ -6,7 +6,11 @@ This document provides instructions on how to use the Sentence Transformer Multi
 
 - [Installation](#installation)
 - [Running the Model](#running-the-model)
+  - [Running with Dummy Data](#running-with-dummy-data)
+  - [Running with Real Data](#running-with-real-data)
 - [Training the Model](#training-the-model)
+  - [Training with Dummy Data](#training-with-dummy-data)
+  - [Training with Real Datasets](#training-with-real-datasets)
 - [Using the API](#using-the-api)
 - [Deployment](#deployment)
 
@@ -25,7 +29,9 @@ This document provides instructions on how to use the Sentence Transformer Multi
 
 ## Running the Model
 
-You can run the model directly using the `run_model.py` script:
+### Running with Dummy Data
+
+You can run the model with dummy data using the `run_model.py` script:
 
 ```bash
 python src/run_model.py --model_name all-MiniLM-L6-v2 --pooling mean
@@ -36,15 +42,36 @@ This will:
 2. Encode example sentences and show their similarities
 3. Run the multi-task model on the sentences and show predictions
 
-### Options
+#### Options
 
 - `--model_name`: Pre-trained model name for the encoder (default: all-MiniLM-L6-v2)
 - `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
 - `--model_path`: Path to a saved model checkpoint (optional)
 
+### Running with Real Data
+
+You can run the model with real data using the `run_model_real_data.py` script:
+
+```bash
+python src/run_model_real_data.py --model_name bert-base-uncased --pooling mean
+```
+
+This will:
+1. Load sample sentences from SST-2 and CoNLL-2003 datasets
+2. Load the sentence encoder and encode the sentences
+3. Run the multi-task model on the sentences and show predictions for both sentiment analysis and named entity recognition
+
+#### Options
+
+- `--model_name`: Pre-trained model name for the encoder (default: bert-base-uncased)
+- `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
+- `--model_path`: Path to a saved model checkpoint (optional)
+
 ## Training the Model
 
-To train the model, use the `train.py` script:
+### Training with Dummy Data
+
+To train the model with dummy data, use the `train.py` script:
 
 ```bash
 python src/train.py --model_name all-MiniLM-L6-v2 --pooling mean --epochs 5
@@ -55,7 +82,7 @@ This will:
 2. Train the model for the specified number of epochs
 3. Save the best model to the output directory
 
-### Training Options
+#### Training Options
 
 - `--model_name`: Pre-trained model name for the encoder (default: all-MiniLM-L6-v2)
 - `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
@@ -74,6 +101,49 @@ This will:
 - `--seed`: Random seed (default: 42)
 - `--device`: Device to use (cuda or cpu; default: cuda if available, otherwise cpu)
 - `--output_dir`: Directory to save model and results (default: ./outputs)
+
+### Training with Real Datasets
+
+To train the model with real datasets (SST-2 for sentiment analysis and CoNLL-2003 for NER), use the `train_real_data.py` script:
+
+```bash
+python src/train_real_data.py --model_name bert-base-uncased --pooling mean --epochs 3 --sample_size 1000
+```
+
+This will:
+1. Load the SST-2 dataset for sentiment analysis (Task A)
+2. Load the CoNLL-2003 dataset for named entity recognition (Task B)
+3. Train the model for the specified number of epochs
+4. Save the best model to the output directory
+5. Evaluate the model on the test set
+
+#### Real Data Training Options
+
+- `--model_name`: Pre-trained model name for the encoder (default: bert-base-uncased)
+- `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
+- `--max_length`: Maximum sequence length (default: 128)
+- `--batch_size`: Batch size for training (default: 16)
+- `--epochs`: Number of training epochs (default: 3)
+- `--lr`: Learning rate (default: 2e-5)
+- `--weight_decay`: Weight decay (default: 0.01)
+- `--task_a_weight`: Weight for Task A loss (default: 1.0)
+- `--task_b_weight`: Weight for Task B loss (default: 1.0)
+- `--sample_size`: Number of examples to use from each dataset (default: 1000, use None for full datasets)
+- `--freeze_encoder`: Freeze the encoder parameters (flag)
+- `--freeze_task_a`: Freeze Task A head parameters (flag)
+- `--freeze_task_b`: Freeze Task B head parameters (flag)
+- `--seed`: Random seed (default: 42)
+- `--device`: Device to use (cuda or cpu; default: cuda if available, otherwise cpu)
+- `--output_dir`: Directory to save model and results (default: ./outputs)
+
+#### Datasets
+
+The real data training uses the following datasets:
+
+1. **SST-2 (Stanford Sentiment Treebank)**: A dataset for sentiment analysis with binary labels (positive/negative).
+2. **CoNLL-2003**: A dataset for named entity recognition with 9 entity types (O, B-PER, I-PER, B-ORG, I-ORG, B-LOC, I-LOC, B-MISC, I-MISC).
+
+These datasets are automatically downloaded using the Hugging Face Datasets library.
 
 ## Using the API
 

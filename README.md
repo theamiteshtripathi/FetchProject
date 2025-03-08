@@ -66,9 +66,10 @@ Multi-task learning (MTL) is a training paradigm where a single model is trained
 
 - **PyTorch**: Primary deep learning framework
 - **Hugging Face Transformers**: For pre-trained transformer models
+- **Hugging Face Datasets**: For loading and processing datasets
 - **AWS**: For deployment and hosting
 - **Docker**: For containerization
-- **Flask/FastAPI**: For API development
+- **FastAPI**: For API development
 
 ### Implementation Steps
 
@@ -102,6 +103,18 @@ Multi-task learning (MTL) is a training paradigm where a single model is trained
    - Analyze multi-task learning benefits
    - Prepare for deployment
 
+### Datasets
+
+The project supports training with both dummy data and real datasets:
+
+1. **Dummy Data**: Generated synthetic data for quick testing and demonstration.
+
+2. **Real Datasets**:
+   - **SST-2 (Stanford Sentiment Treebank)**: A dataset for sentiment analysis with binary labels (positive/negative).
+   - **CoNLL-2003**: A dataset for named entity recognition with 9 entity types (O, B-PER, I-PER, B-ORG, I-ORG, B-LOC, I-LOC, B-MISC, I-MISC).
+
+These datasets are automatically downloaded using the Hugging Face Datasets library.
+
 ### Deployment Strategy
 
 - Containerize the application with Docker
@@ -122,6 +135,7 @@ Multi-task learning (MTL) is a training paradigm where a single model is trained
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
 3. Follow the notebooks in the `notebooks/` directory for examples
+4. See the documentation in the `docs/` directory for detailed usage instructions
 
 ## License
 

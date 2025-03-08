@@ -1,0 +1,10 @@
+Follow PEP 8 style guidelines for Python code
+Use type hints in function signatures
+Document all functions, classes, and modules with docstrings
+Write unit tests for all core functionality
+Keep functions small and focused on a single responsibility
+Use meaningful variable and function names
+Handle exceptions appropriately
+Log important events and errors
+Use environment variables for configuration
+Containerize the application using Docker 
