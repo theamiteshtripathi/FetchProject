@@ -130,7 +130,7 @@ def main():
     """Main function."""
     parser = argparse.ArgumentParser(description='Run the sentence transformer and multi-task model with real data')
     
-    parser.add_argument('--model_name', type=str, default='bert-base-uncased',
+    parser.add_argument('--model_name', type=str, default='sentence-transformers/all-MiniLM-L6-v2',
                         help='Pre-trained model name for the encoder')
     parser.add_argument('--pooling', type=str, default='mean',
                         choices=['mean', 'cls', 'max'],

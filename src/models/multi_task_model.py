@@ -103,7 +103,7 @@ class MultiTaskModel(nn.Module):
     
     def __init__(
         self,
-        encoder_model_name: str = "all-MiniLM-L6-v2",
+        encoder_model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
         pooling_strategy: str = "mean",
         task_a_num_classes: int = 3,
         task_b_num_labels: int = 5,

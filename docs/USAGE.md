@@ -12,6 +12,7 @@ This document provides instructions on how to use the Sentence Transformer Multi
   - [Training with Dummy Data](#training-with-dummy-data)
   - [Training with Real Datasets](#training-with-real-datasets)
 - [Using the API](#using-the-api)
+- [Using the Frontend](#using-the-frontend)
 - [Deployment](#deployment)
 
 ## Installation
@@ -34,7 +35,7 @@ This document provides instructions on how to use the Sentence Transformer Multi
 You can run the model with dummy data using the `run_model.py` script:
 
 ```bash
-python src/run_model.py --model_name all-MiniLM-L6-v2 --pooling mean
+python src/run_model.py --model_name sentence-transformers/all-MiniLM-L6-v2 --pooling mean
 ```
 
 This will:
@@ -44,7 +45,7 @@ This will:
 
 #### Options
 
-- `--model_name`: Pre-trained model name for the encoder (default: all-MiniLM-L6-v2)
+- `--model_name`: Pre-trained model name for the encoder (default: sentence-transformers/all-MiniLM-L6-v2)
 - `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
 - `--model_path`: Path to a saved model checkpoint (optional)
 
@@ -53,7 +54,7 @@ This will:
 You can run the model with real data using the `run_model_real_data.py` script:
 
 ```bash
-python src/run_model_real_data.py --model_name bert-base-uncased --pooling mean
+python src/run_model_real_data.py --model_name sentence-transformers/all-MiniLM-L6-v2 --pooling mean
 ```
 
 This will:
@@ -63,7 +64,7 @@ This will:
 
 #### Options
 
-- `--model_name`: Pre-trained model name for the encoder (default: bert-base-uncased)
+- `--model_name`: Pre-trained model name for the encoder (default: sentence-transformers/all-MiniLM-L6-v2)
 - `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
 - `--model_path`: Path to a saved model checkpoint (optional)
 
@@ -74,7 +75,7 @@ This will:
 To train the model with dummy data, use the `train.py` script:
 
 ```bash
-python src/train.py --model_name all-MiniLM-L6-v2 --pooling mean --epochs 5
+python src/train.py --model_name sentence-transformers/all-MiniLM-L6-v2 --pooling mean --epochs 5
 ```
 
 This will:
@@ -84,7 +85,7 @@ This will:
 
 #### Training Options
 
-- `--model_name`: Pre-trained model name for the encoder (default: all-MiniLM-L6-v2)
+- `--model_name`: Pre-trained model name for the encoder (default: sentence-transformers/all-MiniLM-L6-v2)
 - `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
 - `--task_a_classes`: Number of classes for Task A (default: 3)
 - `--task_b_labels`: Number of labels for Task B (default: 5)
@@ -107,7 +108,7 @@ This will:
 To train the model with real datasets (SST-2 for sentiment analysis and CoNLL-2003 for NER), use the `train_real_data.py` script:
 
 ```bash
-python src/train_real_data.py --model_name bert-base-uncased --pooling mean --epochs 3 --sample_size 1000
+python src/train_real_data.py --model_name sentence-transformers/all-MiniLM-L6-v2 --pooling mean --epochs 3 --sample_size 1000
 ```
 
 This will:
@@ -119,7 +120,7 @@ This will:
 
 #### Real Data Training Options
 
-- `--model_name`: Pre-trained model name for the encoder (default: bert-base-uncased)
+- `--model_name`: Pre-trained model name for the encoder (default: sentence-transformers/all-MiniLM-L6-v2)
 - `--pooling`: Pooling strategy for sentence embeddings (choices: mean, cls, max; default: mean)
 - `--max_length`: Maximum sequence length (default: 128)
 - `--batch_size`: Batch size for training (default: 16)
@@ -183,6 +184,36 @@ This will:
 - `GET /health`: Health check endpoint
 - `POST /encode`: Encode sentences to embeddings
 - `POST /predict`: Make predictions for both tasks
+
+## Using the Frontend
+
+The project includes a web-based frontend built with Streamlit that provides a user-friendly interface for interacting with the model.
+
+### Starting the Frontend
+
+To start the frontend, use the `run_frontend.py` script:
+
+```bash
+python src/run_frontend.py --port 8501
+```
+
+This will start a Streamlit server that serves the frontend application. You can access it by opening your browser and navigating to `http://localhost:8501`.
+
+### Frontend Options
+
+- `--port`: Port to run the Streamlit app on (default: 8501)
+
+### Frontend Features
+
+The frontend provides the following features:
+
+1. **Model Configuration**: Select the pre-trained model and pooling strategy.
+2. **Input Sentences**: Enter your own sentences or select from example sentences.
+3. **Sentence Embeddings**: Visualize the sentence embeddings and their dimensions.
+4. **Task Predictions**: View the predictions for both tasks (sentiment analysis and named entity recognition).
+5. **Similarity Matrix**: Explore the similarity between different sentences.
+
+The frontend is designed to be intuitive and user-friendly, making it easy to interact with the model and understand its outputs.
 
 ## Deployment
 

@@ -43,7 +43,8 @@ FetchProject/
 │   ├── models/             # Model definitions
 │   ├── data/               # Data loading and processing
 │   ├── utils/              # Utility functions
-│   └── api/                # API for model serving
+│   ├── api/                # API for model serving
+│   └── frontend/           # Streamlit frontend
 ├── notebooks/              # Jupyter notebooks
 ├── tests/                  # Unit and integration tests
 ├── docker/                 # Docker-related files
@@ -68,9 +69,10 @@ Multi-task learning (MTL) is a training paradigm where a single model is trained
 - **PyTorch**: Primary deep learning framework
 - **Hugging Face Transformers**: For pre-trained transformer models
 - **Hugging Face Datasets**: For loading and processing datasets
-- **AWS**: For deployment and hosting
-- **Docker**: For containerization
+- **Streamlit**: For building the interactive frontend
 - **FastAPI**: For API development
+- **Docker**: For containerization
+- **AWS**: For deployment and hosting
 
 ### Implementation Steps
 
@@ -103,6 +105,11 @@ Multi-task learning (MTL) is a training paradigm where a single model is trained
    - Evaluate model performance
    - Analyze multi-task learning benefits
    - Prepare for deployment
+
+7. **Building the Frontend** (Day 8)
+   - Create an interactive Streamlit app
+   - Visualize sentence embeddings and similarities
+   - Display task predictions with intuitive UI
 
 ### Datasets
 
@@ -157,9 +164,23 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
    ./init_project.sh
    ```
 
-4. Follow the notebooks in the `notebooks/` directory for examples
+4. Run the model:
+   ```bash
+   # Run with dummy data
+   python src/run_model.py
+   
+   # Run with real data
+   python src/run_model_real_data.py
+   ```
 
-5. See the documentation in the `docs/` directory for detailed usage instructions
+5. Start the frontend:
+   ```bash
+   python src/run_frontend.py
+   ```
+
+6. Follow the notebooks in the `notebooks/` directory for examples
+
+7. See the documentation in the `docs/` directory for detailed usage instructions
 
 ## License
 

@@ -17,7 +17,7 @@ class SentenceEncoder(nn.Module):
     
     def __init__(
         self, 
-        model_name: str = "all-MiniLM-L6-v2", 
+        model_name: str = "sentence-transformers/all-MiniLM-L6-v2", 
         pooling_strategy: str = "mean",
         max_length: int = 128
     ):
