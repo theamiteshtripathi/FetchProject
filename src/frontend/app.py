@@ -11,9 +11,13 @@ import seaborn as sns
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Add the parent directory to the path so we can import the models
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from models.sentence_encoder import SentenceEncoder
-from models.multi_task_model import MultiTaskModel
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(os.path.dirname(current_dir))
+sys.path.append(parent_dir)
+
+# Import the models
+from src.models.sentence_encoder import SentenceEncoder
+from src.models.multi_task_model import MultiTaskModel
 
 # Set page config
 st.set_page_config(
