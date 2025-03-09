@@ -49,6 +49,7 @@ FetchProject/
 ├── docker/                 # Docker-related files
 ├── docs/                   # Documentation
 ├── requirements.txt        # Project dependencies
+├── environment.yml         # Conda environment specification
 └── README.md               # Project documentation
 ```
 
@@ -132,10 +133,33 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
 
 ## Getting Started
 
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Follow the notebooks in the `notebooks/` directory for examples
-4. See the documentation in the `docs/` directory for detailed usage instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/FetchProject.git
+   cd FetchProject
+   ```
+
+2. Set up the conda environment:
+   ```bash
+   # Create and activate the conda environment
+   conda env create -f environment.yml
+   conda activate fetch
+   
+   # Alternatively, you can set up manually:
+   # conda create -n fetch python=3.9
+   # conda activate fetch
+   # conda install pytorch -c pytorch
+   # pip install -r requirements.txt
+   ```
+
+3. Initialize the project:
+   ```bash
+   ./init_project.sh
+   ```
+
+4. Follow the notebooks in the `notebooks/` directory for examples
+
+5. See the documentation in the `docs/` directory for detailed usage instructions
 
 ## License
 

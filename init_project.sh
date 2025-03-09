@@ -17,26 +17,13 @@ touch tests/__init__.py
 # Make shell scripts executable
 chmod +x docker/run_docker.sh docker/deploy_aws.sh
 
-# Create virtual environment (optional)
-if command -v python3 &>/dev/null; then
-    echo "Creating virtual environment..."
-    python3 -m venv venv
-    
-    # Activate virtual environment
-    if [ -f venv/bin/activate ]; then
-        source venv/bin/activate
-        
-        # Install dependencies
-        echo "Installing dependencies..."
-        pip install -r requirements.txt
-        
-        echo "Virtual environment created and dependencies installed."
-    else
-        echo "Failed to create virtual environment."
-    fi
-else
-    echo "Python 3 not found. Please install Python 3 and try again."
-fi
-
+# Instructions for conda environment
 echo "Project initialized successfully!"
+echo ""
+echo "To set up the conda environment, run the following commands:"
+echo "conda create -n fetch python=3.9"
+echo "conda activate fetch"
+echo "conda install pytorch -c pytorch"
+echo "pip install -r requirements.txt"
+echo ""
 echo "To get started, see the documentation in the docs/ directory." 
