@@ -15,7 +15,7 @@ ImportError: tokenizers>=0.11.1,!=0.11.3,<0.14 is required for a normal function
 1. Update your environment with compatible versions:
 
 ```bash
-pip install transformers==4.36.2 tokenizers==0.13.3
+pip install transformers==4.36.2 tokenizers==0.21.0
 ```
 
 2. Or use the provided script to fix the environment and run the app:
@@ -24,7 +24,32 @@ pip install transformers==4.36.2 tokenizers==0.13.3
 ./fix_and_run.sh
 ```
 
-### 2. Import Errors in the Frontend
+### 2. PyTorch and Streamlit Conflict
+
+**Issue**: The Streamlit app fails with errors related to PyTorch:
+
+```
+RuntimeError: no running event loop
+
+RuntimeError: Tried to instantiate class '__path__._path', but it does not exist! Ensure that it is registered via torch::class_
+```
+
+**Solution**:
+
+1. Use the provided script that sets an environment variable to prevent Streamlit from watching PyTorch modules:
+
+```bash
+./run_streamlit.sh
+```
+
+2. Or set the environment variable manually before running the app:
+
+```bash
+export STREAMLIT_WATCH_EXCLUDE_MODULES="torch,tensorflow"
+streamlit run src/frontend/app.py
+```
+
+### 3. Import Errors in the Frontend
 
 **Issue**: The app fails with import errors when trying to import models.
 
@@ -44,7 +69,7 @@ python test_imports.py
 ./fix_and_run.sh
 ```
 
-### 3. Testing the Streamlit App
+### 4. Testing the Streamlit App
 
 If you want to test that Streamlit works correctly without running the full app:
 
@@ -54,7 +79,7 @@ If you want to test that Streamlit works correctly without running the full app:
 
 This will start a simple Streamlit app that tests the imports and verifies that everything is working correctly.
 
-### 4. Conda Environment Issues
+### 5. Conda Environment Issues
 
 If you're having issues with the conda environment:
 
@@ -76,22 +101,30 @@ conda activate fetch
 python test_imports.py
 ```
 
-### 5. Running the Full App
+### 6. Running the Full App
 
 Once you've fixed the environment issues, you can run the full app:
 
 ```bash
-python src/run_frontend.py
+# Run the frontend
+./run_streamlit.sh
+
+# Run the API
+python src/run_api.py
 ```
 
-Or use the provided script:
+Or use Docker:
 
 ```bash
-./fix_and_run.sh
+# Run the API
+./docker/run_docker.sh --mode api
+
+# Run the frontend
+./docker/run_docker.sh --mode frontend
 ```
 
 ## Additional Resources
 
 - [Transformers Documentation](https://huggingface.co/docs/transformers/index)
 - [Streamlit Documentation](https://docs.streamlit.io/)
-- [Sentence Transformers Documentation](https://www.sbert.net/) 
+- [Sentence Transformers Documentation](https://www.sbert.net/)

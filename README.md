@@ -162,25 +162,63 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
 3. Initialize the project:
    ```bash
    ./init_project.sh
+   # Or use make
+   make setup
    ```
 
 4. Run the model:
    ```bash
    # Run with dummy data
    python src/run_model.py
+   # Or use make
+   make run-model
    
    # Run with real data
    python src/run_model_real_data.py
+   # Or use make
+   make run-real-data
    ```
 
 5. Start the frontend:
    ```bash
-   python src/run_frontend.py
+   # Use the consolidated script
+   ./run_streamlit.sh
+   # Or use make
+   make run-frontend
    ```
 
-6. Follow the notebooks in the `notebooks/` directory for examples
+6. Run with Docker:
+   ```bash
+   # Run the API
+   ./docker/run_docker.sh --mode api
+   # Or use make
+   make docker-api
+   
+   # Run the frontend
+   ./docker/run_docker.sh --mode frontend
+   # Or use make
+   make docker-frontend
+   
+   # For more options
+   ./docker/run_docker.sh --help
+   ```
 
-7. See the documentation in the `docs/` directory for detailed usage instructions
+7. Run tests:
+   ```bash
+   python -m unittest discover tests
+   # Or use make
+   make test
+   ```
+
+8. Clean up:
+   ```bash
+   # Clean up cache files
+   make clean
+   ```
+
+9. Follow the notebooks in the `notebooks/` directory for examples
+
+10. See the documentation in the `docs/` directory for detailed usage instructions
 
 ## License
 
