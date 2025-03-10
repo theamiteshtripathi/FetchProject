@@ -1,0 +1,276 @@
+[
+  {
+    "sentence": "I love machine learning and natural language processing.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "O",
+      "O",
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "B-TECH",
+      "I-TECH",
+      "I-TECH",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Python is my favorite programming language.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "O",
+      "O",
+      "O",
+      "B-TECH",
+      "I-TECH",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Deep learning models are revolutionizing NLP applications.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "O",
+      "O",
+      "B-TECH",
+      "I-TECH",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Artificial intelligence is transforming healthcare.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "JavaScript frameworks make web development easier.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "B-TECH",
+      "O",
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Cloud computing has revolutionized business operations.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Quantum computing will solve complex problems faster.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Data science combines statistics and programming.",
+    "task_a_label": "Technology",
+    "task_b_labels": [
+      "B-TECH",
+      "I-TECH",
+      "O",
+      "O",
+      "O",
+      "B-TECH",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The weather is beautiful today.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "It's a sunny day with clear skies.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "O",
+      "B-WEATHER",
+      "I-WEATHER",
+      "O",
+      "B-WEATHER",
+      "I-WEATHER",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The forecast predicts rain for the weekend.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "O",
+      "B-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The humidity is very high today.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "A cold front is moving in from the north.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "I-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The temperature dropped significantly overnight.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The wind speed has increased to 30 mph.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "I-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Today's temperature is 25 degrees Celsius.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The barometric pressure is 1013 hPa.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "O",
+      "B-WEATHER",
+      "I-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Wind gusts of up to 45 mph are expected.",
+    "task_a_label": "Weather",
+    "task_b_labels": [
+      "B-WEATHER",
+      "I-WEATHER",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I went to the store to buy some groceries.",
+    "task_a_label": "Other",
+    "task_b_labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "The movie we watched last night was amazing.",
+    "task_a_label": "Other",
+    "task_b_labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  }
+]

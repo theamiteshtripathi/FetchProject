@@ -60,11 +60,7 @@ def run_multi_task_model(model: MultiTaskModel, sentences: List[str]) -> None:
     task_b_labels = ["O", "B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "B-MISC", "I-MISC"]  # CoNLL-2003 labels
     
     # Make predictions
-    predictions = model.predict(sentences)
-    
-    # Get predictions for each task
-    task_a_preds = predictions['task_a']
-    task_b_preds = predictions['task_b']
+    task_a_preds, task_a_probs, task_b_preds, task_b_probs = model.predict(sentences)
     
     # Print predictions
     for i, sentence in enumerate(sentences):
@@ -72,20 +68,23 @@ def run_multi_task_model(model: MultiTaskModel, sentences: List[str]) -> None:
         
         # Task A prediction (sentiment classification)
         task_a_pred = task_a_preds[i]
-        print(f"Task A (Sentiment): {task_a_labels[task_a_pred]}")
+        print(f"Task A (Sentiment): {task_a_labels[int(task_a_pred)] if task_a_pred.isdigit() else task_a_pred}")
         
         # Task B prediction (token classification)
         tokens = sentence.split()
-        task_b_pred = task_b_preds[i][:len(tokens)]  # Get predictions for actual tokens
-        
-        # Map numeric predictions to labels
-        token_labels = [task_b_labels[pred] for pred in task_b_pred]
-        
-        # Print token-level predictions
-        print("Task B (NER):")
-        for token, label in zip(tokens, token_labels):
-            print(f"  {token}: {label}")
-        
+        if i < len(task_b_preds):
+            task_b_pred = task_b_preds[i]
+            if len(tokens) != len(task_b_pred):
+                print(f"  Token mismatch: {len(tokens)} tokens vs {len(task_b_pred)} predictions")
+            else:
+                print("Task B (Named Entities):")
+                for token, tag in zip(tokens, task_b_pred):
+                    tag_idx = task_b_labels.index(tag) if tag in task_b_labels else -1
+                    tag_name = task_b_labels[tag_idx] if tag_idx >= 0 else tag
+                    print(f"  {token}: {tag_name}")
+        else:
+            print("No Task B predictions available for this sentence.")
+            
         print("\n" + "-"*50 + "\n")
 
 
@@ -159,10 +158,9 @@ def main():
     # Load multi-task model
     print(f"\nLoading multi-task model...")
     model = MultiTaskModel(
+        encoder=encoder,
         encoder_model_name=args.model_name,
-        pooling_strategy=args.pooling,
-        task_a_num_classes=2,  # SST-2: 2 classes (negative, positive)
-        task_b_num_labels=9    # CoNLL-2003: 9 labels (O, B-PER, I-PER, etc.)
+        pooling_strategy=args.pooling
     )
     
     # Load saved model if specified

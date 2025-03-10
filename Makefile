@@ -22,6 +22,18 @@ run-frontend:
 run-api:
 	python src/run_api.py
 
+# Create example data for fine-tuning
+create-example-data:
+	python src/fine_tune.py --create_example_data
+
+# Fine-tune the model
+fine-tune:
+	python src/fine_tune.py --num_epochs 5 --batch_size 8
+
+# Run the model with a fine-tuned model
+run-fine-tuned:
+	python src/run_model.py --model_path outputs/models/fine_tuned/model_final.pt
+
 # Run tests
 test:
 	python -m unittest discover tests

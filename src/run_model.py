@@ -46,7 +46,7 @@ def encode_sentences(encoder: SentenceEncoder, sentences: List[str]) -> None:
 
 def run_multi_task_model(model: MultiTaskModel, sentences: List[str]) -> None:
     """
-    Run the multi-task model on sentences and print predictions.
+    Run the multi-task model on the given sentences.
     
     Args:
         model: The multi-task model
@@ -54,38 +54,26 @@ def run_multi_task_model(model: MultiTaskModel, sentences: List[str]) -> None:
     """
     print("\n=== Multi-Task Model Predictions ===\n")
     
-    # Define class names and NER tags for interpretation
-    task_a_labels = ["Technology", "Weather", "Other"]  # Example class names
-    task_b_labels = ["O", "B-TECH", "I-TECH", "B-WEATHER", "I-WEATHER"]  # Example NER tags
-    
     # Make predictions
-    predictions = model.predict(sentences)
-    
-    # Get predictions for each task
-    task_a_preds = predictions['task_a']
-    task_b_preds = predictions['task_b']
+    task_a_preds, task_a_probs, task_b_preds, task_b_probs = model.predict(sentences)
     
     # Print predictions
     for i, sentence in enumerate(sentences):
         print(f"Sentence: {sentence}")
         
-        # Task A prediction (sentence classification)
-        task_a_pred = task_a_preds[i]
-        print(f"Task A (Classification): {task_a_labels[task_a_pred]}")
+        # Task A: Sentence Classification
+        print(f"Task A (Classification): {task_a_preds[i]}")
         
-        # Task B prediction (token classification)
-        tokens = sentence.split()
-        task_b_pred = task_b_preds[i][:len(tokens)]  # Get predictions for actual tokens
-        
-        # Map numeric predictions to labels
-        token_labels = [task_b_labels[pred] for pred in task_b_pred]
-        
-        # Print token-level predictions
+        # Task B: Token Classification
         print("Task B (Token Classification):")
-        for token, label in zip(tokens, token_labels):
-            print(f"  {token}: {label}")
+        tokens = sentence.split()
+        if len(tokens) == len(task_b_preds[i]):
+            for token, tag in zip(tokens, task_b_preds[i]):
+                print(f"  {token}: {tag}")
+        else:
+            print(f"  Token mismatch: {len(tokens)} tokens vs {len(task_b_preds[i])} predictions")
         
-        print("\n" + "-"*50 + "\n")
+        print("\n--------------------------------------------------\n")
 
 
 def main():
@@ -99,6 +87,8 @@ def main():
                         help='Pooling strategy for sentence embeddings')
     parser.add_argument('--model_path', type=str, default=None,
                         help='Path to a saved model checkpoint')
+    parser.add_argument('--input_file', type=str, default=None,
+                        help='Path to a file containing sentences (one per line)')
     
     args = parser.parse_args()
     
@@ -106,14 +96,20 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
-    # Example sentences
-    sentences = [
-        "I love machine learning and natural language processing.",
-        "Deep learning models are revolutionizing NLP applications.",
-        "The weather is beautiful today.",
-        "It's a sunny day with clear skies.",
-        "Python is my favorite programming language."
-    ]
+    # Example sentences or load from file
+    if args.input_file and os.path.exists(args.input_file):
+        print(f"Loading sentences from {args.input_file}")
+        with open(args.input_file, 'r', encoding='utf-8') as f:
+            sentences = [line.strip() for line in f if line.strip()]
+        print(f"Loaded {len(sentences)} sentences")
+    else:
+        sentences = [
+            "I love machine learning and natural language processing.",
+            "Deep learning models are revolutionizing NLP applications.",
+            "The weather is beautiful today.",
+            "It's a sunny day with clear skies.",
+            "Python is my favorite programming language."
+        ]
     
     # Load sentence encoder
     print(f"\nLoading sentence encoder with {args.model_name} and {args.pooling} pooling...")
@@ -127,10 +123,9 @@ def main():
     # Load multi-task model
     print(f"\nLoading multi-task model...")
     model = MultiTaskModel(
+        encoder=encoder,
         encoder_model_name=args.model_name,
-        pooling_strategy=args.pooling,
-        task_a_num_classes=3,  # Example: 3 classes for Task A
-        task_b_num_labels=5    # Example: 5 labels for Task B (NER)
+        pooling_strategy=args.pooling
     )
     
     # Load saved model if specified

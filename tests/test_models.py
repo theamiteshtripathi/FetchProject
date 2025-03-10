@@ -82,9 +82,7 @@ class TestMultiTaskModel(unittest.TestCase):
         """Set up the test environment."""
         self.model = MultiTaskModel(
             encoder_model_name="all-MiniLM-L6-v2",
-            pooling_strategy="mean",
-            task_a_num_classes=3,
-            task_b_num_labels=5
+            pooling_strategy="mean"
         )
         self.test_sentences = [
             "This is a test sentence.",

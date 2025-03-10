@@ -59,9 +59,11 @@ FetchProject/
 ### Understanding Key Concepts
 
 #### Sentence Transformers
+
 A sentence transformer converts an entire sentence into a fixed-size numerical vector (embedding) that captures its meaning. This is achieved by passing a sentence through a transformer model like BERT and then applying pooling operations to obtain a single vector representation.
 
 #### Multi-Task Learning
+
 Multi-task learning (MTL) is a training paradigm where a single model is trained to perform multiple tasks simultaneously. By sharing knowledge across tasks, MTL often leads to improved learning efficiency and better generalization.
 
 ### Tech Stack & Tools
@@ -77,31 +79,37 @@ Multi-task learning (MTL) is a training paradigm where a single model is trained
 ### Implementation Steps
 
 1. **Setting Up the Environment** (Day 1)
+
    - Configure development environment
    - Install necessary libraries
    - Set up version control
 
 2. **Implementing the Sentence Transformer** (Days 2-3)
+
    - Leverage pre-trained models
    - Implement sentence encoding functionality
    - Test with sample sentences
 
 3. **Expanding to Multi-Task Learning** (Days 3-4)
+
    - Implement task-specific heads
    - Integrate with the sentence encoder
    - Test with dummy data
 
 4. **Training Considerations** (Day 5)
+
    - Explore different freezing scenarios
    - Implement transfer learning strategies
    - Document training approaches
 
 5. **Writing the Training Loop** (Day 6)
+
    - Implement multi-task training logic
    - Handle task-specific losses
    - Monitor training progress
 
 6. **Testing and Evaluating Results** (Day 7)
+
    - Evaluate model performance
    - Analyze multi-task learning benefits
    - Prepare for deployment
@@ -141,17 +149,19 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
 ## Getting Started
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/FetchProject.git
    cd FetchProject
    ```
 
 2. Set up the conda environment:
+
    ```bash
    # Create and activate the conda environment
    conda env create -f environment.yml
    conda activate fetch
-   
+
    # Alternatively, you can set up manually:
    # conda create -n fetch python=3.9
    # conda activate fetch
@@ -160,6 +170,7 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
    ```
 
 3. Initialize the project:
+
    ```bash
    ./init_project.sh
    # Or use make
@@ -167,12 +178,13 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
    ```
 
 4. Run the model:
+
    ```bash
    # Run with dummy data
    python src/run_model.py
    # Or use make
    make run-model
-   
+
    # Run with real data
    python src/run_model_real_data.py
    # Or use make
@@ -180,6 +192,7 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
    ```
 
 5. Start the frontend:
+
    ```bash
    # Use the consolidated script
    ./run_streamlit.sh
@@ -188,37 +201,57 @@ These datasets are automatically downloaded using the Hugging Face Datasets libr
    ```
 
 6. Run with Docker:
+
    ```bash
    # Run the API
    ./docker/run_docker.sh --mode api
    # Or use make
    make docker-api
-   
+
    # Run the frontend
    ./docker/run_docker.sh --mode frontend
    # Or use make
    make docker-frontend
-   
+
    # For more options
    ./docker/run_docker.sh --help
    ```
 
 7. Run tests:
+
    ```bash
    python -m unittest discover tests
    # Or use make
    make test
    ```
 
-8. Clean up:
+8. Fine-tune the model:
+
+   ```bash
+   # Create example data
+   make create-example-data
+
+   # Fine-tune the model
+   make fine-tune
+
+   # Run the model with the fine-tuned model
+   make run-fine-tuned
+   ```
+
+9. Clean up:
+
    ```bash
    # Clean up cache files
    make clean
    ```
 
-9. Follow the notebooks in the `notebooks/` directory for examples
+10. Follow the notebooks in the `notebooks/` directory for examples
 
-10. See the documentation in the `docs/` directory for detailed usage instructions
+11. See the documentation in the `docs/` directory for detailed usage instructions
+
+## User Guide
+
+For a comprehensive guide on how to use this project, including how to explain it to an interviewer, see the [USER_GUIDE.md](USER_GUIDE.md) file.
 
 ## License
 

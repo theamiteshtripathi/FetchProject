@@ -9,7 +9,11 @@ conda activate fetch
 
 # Set environment variables to prevent issues with PyTorch and Streamlit
 export STREAMLIT_WATCH_EXCLUDE_MODULES="torch,tensorflow"
+export STREAMLIT_SERVER_HEADLESS=true
 export PYTHONPATH="${PYTHONPATH}:${PWD}"
+
+# Force PyTorch to use CPU to avoid CUDA issues with Streamlit
+export CUDA_VISIBLE_DEVICES=""
 
 # Optional: Update dependencies if needed (uncomment if required)
 # echo "Updating dependencies..."
